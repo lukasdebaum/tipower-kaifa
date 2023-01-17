@@ -12,18 +12,18 @@ get the smartmeter data over m-bus from a kaifa tinetz smartmeter and save it to
 
 ## Requirements Software
 
-`apt update`
+`apt update`  
 `apt install python3-serial python3-pycryptodome python3-requests`
 
 ## Install
 
-`mkdir src`
-`cd src/`
-`git clone https://github.com/lukasdebaum/tipower-kaifa`
-`mv tipower-kaifa /opt/`
-`cd /opt/tipower-kaifa/`
-`cp tipower_kaifa.service /etc/systemd/system/tipower_kaifa.service`
-`cp example_config.py config.py`
+`mkdir src`  
+`cd src/`  
+`git clone https://github.com/lukasdebaum/tipower-kaifa`  
+`mv tipower-kaifa /opt/`  
+`cd /opt/tipower-kaifa/`  
+`cp tipower_kaifa.service /etc/systemd/system/tipower_kaifa.service`  
+`cp example_config.py config.py`  
 
 edit `config.py` with your favorite editor
 
@@ -38,8 +38,8 @@ serial port in linux dev
 smartmeter device name for influxdb device tag
 
 ### key
-"Kundenschnittstellen Zugangscode"
-smartmeter AES key, format: 685A...
+"Kundenschnittstellen Zugangscode"  
+smartmeter AES key, format: 685A...  
 can be requested via the tinetz customer portal https://kundenportal.tinetz.at/
 
 ### db_name 
@@ -50,17 +50,17 @@ interval in seconds when the aggregated values send to the influxdb
 
 ## systemd service
 
-reload systemd 
-`systemctl daemon-reload`
+reload systemd  
+`systemctl daemon-reload`  
 
-activate tipower_kaifa service on boot
-`systemctl enable tipower_kaifa.service`
+activate tipower_kaifa service on boot  
+`systemctl enable tipower_kaifa.service`  
 
-start tipower_kaifa service
-`systemctl start tipower_kaifa.service`
+start tipower_kaifa service  
+`systemctl start tipower_kaifa.service`  
 
-show status of service (check if tipower_kaifa runs)
-`systemctl status tipower_kaifa.service`
+show status of service (check if tipower_kaifa runs)  
+`systemctl status tipower_kaifa.service`  
 
 ## ToDo
 
