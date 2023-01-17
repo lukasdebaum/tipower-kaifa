@@ -2,7 +2,8 @@
 
 ## Overview
 
-get the smartmeter data over m-bus from a kaifa tinetz smartmeter and save it to influxdb and display the data with grafana
+get the smartmeter data over m-bus from a kaifa tinetz smartmeter and save it to influxdb and display the data with grafana  
+[tinetz smartmeter](https://www.tinetz.at/uploads/tx_bh/smart_meter_kurzanleitung_02022022.pdf)
 
 ## Requirements Hardware
 
@@ -76,6 +77,7 @@ debug = True
 
 ## ToDo
 
+ - export grafana dasboard
  - add influxdb authentication
 
 ## Thanks
