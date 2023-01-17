@@ -71,7 +71,7 @@ edit `config.py`
 ```
 debug = True
 ```
-`systemctl stop tipower_kaifa.service`
+`systemctl stop tipower_kaifa.service`  
 `python3 process_kaifa.py`
 
 ## ToDo
