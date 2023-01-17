@@ -48,6 +48,9 @@ influx db name
 ### interval
 interval in seconds when the aggregated values send to the influxdb
 
+### debug
+disable/enable debug output (False/True)
+
 ## systemd service
 
 reload systemd  
@@ -61,6 +64,15 @@ start tipower_kaifa service
 
 show status of service (check if tipower_kaifa runs)  
 `systemctl status tipower_kaifa.service`  
+
+## Debug
+
+edit `config.py`
+```
+debug = True
+```
+`systemctl stop tipower_kaifa.service`
+`python3 process_kaifa.py`
 
 ## ToDo
 

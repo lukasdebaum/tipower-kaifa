@@ -4,3 +4,4 @@ device = 'kaifa_xxx'
 key = 'xyz'
 db_name = 'mymeasurements'
 interval = 60
+debug = False

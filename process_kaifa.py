@@ -29,7 +29,8 @@ def write_influx(aggregate_data):
         influx_data_pack.append(influx_data)
 
     influx_data_pack_format = '\n'.join(influx_data_pack)
-    #print(influx_data_pack_format)
+    if config.debug:
+        print('post to influxdb: ' + str(influx_data_pack))
 
     try:
         r = requests.post(f"http://localhost:8086/write?db={config.db_name}", data=influx_data_pack_format)
@@ -66,7 +67,8 @@ time_now = time.time()
 time_last = time.time()
 while True:
     energy_object = kaifa.read_energy_data(serial_conn, config.key)
-    #print(energy_object)
+    if config.debug:
+        print('get from smartmeter: ' + str(energy_object.data))
     del energy_object.data['datetime']
 
     for measurement in energy_object.data:
