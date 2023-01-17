@@ -31,11 +31,11 @@ edit `config.py` with your favorite editor
 
 ### serial_port
 serial port in linux dev
- - /dev/ttyUSB0 (for usb adapter)
- - /dev/ttyAMA0 (for serial adaper, disable rpi serial console!)
+ - `/dev/ttyUSB0` (for usb adapter)
+ - `/dev/ttyAMA0` (for serial adaper, disable rpi serial console!)
 
 ### device
-smartmeter device name for influxdb device tag
+smartmeter name for influxdb device tag
 
 ### key
 "Kundenschnittstellen Zugangscode"  
