@@ -1,0 +1,17 @@
+[Unit]
+Description=smartmeter influx write daemon
+#Requires=autossh-influxdb-tunnel.service
+#After=autossh-influxdb-tunnel.service
+Requires=influxd.service
+After=influxd.service
+
+[Service]
+#User=powermeter
+#Group=powermeter
+ExecStart=/opt/tipower-kaifa/process_kaifa.py
+Type=simple
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
