@@ -3,17 +3,11 @@
 import sys
 import signal
 import serial
-import kaifa
 import time
 import requests
 
-#serial_port = '/dev/ttyUSB0'
-serial_port = '/dev/ttyAMA0'
-device = 'kaifa_xxx'
-key = 'xyz'
-db_name = 'mymeasurements'
-interval = 60
-
+import kaifa
+import config
 
 def signal_handler(sig, frame):
     serial_conn.close()
@@ -31,14 +25,14 @@ def write_influx(aggregate_data):
             measurement_value = round(max(aggregate_data[measurement]), 2)
         else:
             measurement_value = round(sum(aggregate_data[measurement]) / len(aggregate_data[measurement]), 2)
-        influx_data = f"smartmeter,device={device} {measurement}={measurement_value}"
+        influx_data = f"smartmeter,device={config.device} {measurement}={measurement_value}"
         influx_data_pack.append(influx_data)
 
     influx_data_pack_format = '\n'.join(influx_data_pack)
     #print(influx_data_pack_format)
 
     try:
-        r = requests.post(f"http://localhost:8086/write?db={db_name}", data=influx_data_pack_format)
+        r = requests.post(f"http://localhost:8086/write?db={config.db_name}", data=influx_data_pack_format)
         r.raise_for_status()
     except requests.exceptions.RequestException as err:
         print ("error: request error - %s" % (err))
@@ -59,7 +53,7 @@ def write_influx(aggregate_data):
     return True
 
 serial_conn = serial.Serial(
-    port = serial_port,
+    port = config.serial_port,
     baudrate = 2400,
     parity = serial.PARITY_EVEN,
     stopbits = serial.STOPBITS_ONE,
@@ -71,7 +65,7 @@ aggregate_data = dict()
 time_now = time.time()
 time_last = time.time()
 while True:
-    energy_object = kaifa.read_energy_data(serial_conn, key)
+    energy_object = kaifa.read_energy_data(serial_conn, config.key)
     #print(energy_object)
     del energy_object.data['datetime']
 
@@ -81,7 +75,7 @@ while True:
         aggregate_data[measurement].append(energy_object.data[measurement])
 
     time_now = time.time()
-    if time_now - time_last >= interval - 1:
+    if time_now - time_last >= config.interval - 1:
         time_last = time.time()
         write_influx(aggregate_data)
         aggregate_data = dict()
