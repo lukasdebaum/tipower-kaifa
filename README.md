@@ -77,8 +77,13 @@ debug = True
 
 ## ToDo
 
- - export grafana dasboard
  - add influxdb authentication
+
+## Grafana Dasboard
+
+import `grafan-dashboard-smartmeter.json` in grafana
+
+![Grafan Dashboard](grafan-dashboard.png)
 
 ## Thanks
  - https://github.com//peerdavid/smartmeter-ha
