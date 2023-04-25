@@ -14,7 +14,7 @@ get the smartmeter data over m-bus from a kaifa tinetz smartmeter and save it to
 ## Requirements Software
 
 `apt update`  
-`apt install python3-serial python3-pycryptodome python3-requests`
+`apt install python3-serial python3-pycryptodome python3-requests python3-sdnotify`
 
 ## Install
 
