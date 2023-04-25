@@ -5,6 +5,7 @@ import signal
 import serial
 import time
 import requests
+import sdnotify
 
 import kaifa
 import config
@@ -36,13 +37,13 @@ def write_influx(aggregate_data):
         r = requests.post(f"http://localhost:8086/write?db={config.db_name}", data=influx_data_pack_format)
         r.raise_for_status()
     except requests.exceptions.RequestException as err:
-        print ("error: request error - %s" % (err))
+        print_e("error: request Request error - %s" % (err))
         return False
     except requests.exceptions.HTTPError as errh:
-        print ("error: request Http Error - %s" % (errh))
+        print_e("error: request Http error - %s" % (errh))
         return False
     except requests.exceptions.ConnectionError as errc:
-        print ("error: request Connecting - %s" % (errc))
+        print_e("error: request Connecting error - %s" % (errc))
         return False
     except requests.exceptions.Timeout as errt:
         print_e("error: request timeout - %s" % (errt))
@@ -65,8 +66,12 @@ serial_conn = serial.Serial(
 aggregate_data = dict()
 time_now = time.time()
 time_last = time.time()
+n = sdnotify.SystemdNotifier()
+n.notify("READY=1")
+n.notify("WATCHDOG=1")
 while True:
     energy_object = kaifa.read_energy_data(serial_conn, config.key)
+    n.notify("WATCHDOG=1")
     if config.debug:
         print('get from smartmeter: ' + str(energy_object.data))
     del energy_object.data['datetime']

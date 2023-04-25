@@ -9,9 +9,11 @@ After=influxd.service
 #User=powermeter
 #Group=powermeter
 ExecStart=/opt/tipower-kaifa/process_kaifa.py
-Type=simple
+Environment=PYTHONUNBUFFERED=1
+Type=notify
 Restart=always
 RestartSec=10
+WatchdogSec=30
 
 [Install]
 WantedBy=multi-user.target
