@@ -78,6 +78,7 @@ debug = True
 ## ToDo
 
  - add influxdb authentication
+ - run the process under a un-privileged user
 
 ## Grafana Dasboard
 
